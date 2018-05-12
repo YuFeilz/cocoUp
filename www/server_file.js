@@ -13,8 +13,8 @@ var server = express();
 
 server.use(multerObj.any());
 server.post('/', function(req, res) {
-    console.log(req.files);
-    var newName = req.files[0].oringnalname + path.parser(req.files[0].oringnalname).ext;
+    // console.log(req.files[0]);
+    var newName = req.files[0].path + path.parse(req.files[0].originalname).ext;
     fs.rename(req.files[0].path, newName, function(err) {
         if (err) {
             res.send('错了');
