@@ -1,0 +1,32 @@
+{
+  "name": "cocoup",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "cookie-session": "^2.0.0-beta.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "express-static": "^1.2.5",
+    "jade": "^1.11.0",
+    "multer": "^1.3.0",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YuFeilz/cocoUp.git"
+  },
+  "author": "yufei",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YuFeilz/cocoUp/issues"
+  },
+  "homepage": "https://github.com/YuFeilz/cocoUp#readme"
+}
