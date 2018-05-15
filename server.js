@@ -6,6 +6,7 @@ const bodyP = require('body-parser'); //只能读取数据类请求不能读取�
 const multer = require('multer');
 const consolidate = require('consolidate'); //模板引擎整合库
 const mysql = require('mysql');
+const common = require('./libs/common');
 
 var server = express();
 var db = mysql.createPool({ host: 'localhost', user: 'root', password: '654321', database: 'blog' })
@@ -54,11 +55,52 @@ server.get('/', (req, res, next) => {
     })
 })
 server.get('/', (req, res) => {
-    // console.log(res.news);
     res.render('index.ejs', { banners: res.banners, news: res.news });
 })
 server.get('/artical', (req, res) => {
-    res.render('conText.ejs', {});
+    if (req.query.id) {
+        if (req.query.link == 'like') {
+            // 增加一条赞
+            db.query(`UPDATE artical_table SET n_like=n_like+1 WHERE ID=${req.query.id}`, (err, data) => {
+                if (err) {
+                    res.status(500).send('服务器出错啦').end();
+                    console.log(err);
+                } else {
+                    // 查询数据
+                    db.query(`SELECT * FROM artical_table WHERE ID=${req.query.id}`, (err, data) => {
+                        if (err) {
+                            res.status(500).send('数据库错误' + err).end();
+                        } else {
+                            if (data.length == 0) {
+                                res.status(404).send('博文不存在').end();
+                            } else {
+                                var articaldata = data[0];
+                                articaldata.sDate = common.timeDate(articaldata.post_time);
+                                res.render('conText.ejs', { artical_data: articaldata });
+                            }
+                        }
+                    });
+                }
+            })
+        } else {
+            db.query(`SELECT * FROM artical_table WHERE ID=${req.query.id}`, (err, data) => {
+                if (err) {
+                    res.status(500).send('数据库错误' + err).end();
+                } else {
+                    if (data.length == 0) {
+                        res.status(404).send('博文不存在').end();
+                    } else {
+                        var articaldata = data[0];
+                        articaldata.sDate = common.timeDate(articaldata.post_time);
+                        res.render('conText.ejs', { artical_data: articaldata });
+                    }
+                }
+            })
+        }
+    } else {
+        res.status(404).send('博文未找到').end();
+    }
+
 })
 
 // 6.静态数据
