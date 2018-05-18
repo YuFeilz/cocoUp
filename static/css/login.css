@@ -1,0 +1,34 @@
+body {
+    position: relative;
+}
+
+.login-dialog {
+    text-align: center;
+    width: 300px;
+    position: absolute;
+    top: 200px;
+    margin: auto;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px 1px #ccc;
+}
+
+.login-dialog input {
+    width: 200px;
+    height: 26px;
+    margin: 8px;
+    border: 1px solid #e48641;
+    background-color: #fff;
+    outline: none;
+    padding: 5px;
+}
+
+.login-dialog input[type="submit"] {
+    background-color: #e48641;
+    border: none;
+    color: #fff;
+    height: 36px;
+    width: 100px;
+}

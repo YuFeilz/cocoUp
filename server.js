@@ -9,7 +9,8 @@ const consolidate = require('consolidate');
 const expressR = require('express-route');
 
 var server = express();
-server.use(multer({ dest: './static/upload' }).any())
+server.use(bodyP.urlencoded());
+server.use(multer({ dest: './static/upload' }).any());
 server.listen(8080);
 
 // cookie session
@@ -32,17 +33,8 @@ server.set('views', 'template'); //设置取数据的模板目录
 server.set('views engine', 'html'); //输出html时需要的东西
 
 // 路由
-var route1 = express.Router();
-var route2 = express.Router();
-server.use('/artical/', route1);
-route1.get('/1.html', (req, res) => {
-    res.send('测试1').end();
-});
-route1.get('/2.html', (req, res) => {
-    res.send('测试2').end();
-})
-server.use('/ss/', route2);
-// router2.get()
+server.use('/', require('./route/web.js')());
+server.use('/admin', require('./route/admin.js')());
 
 // 静态文件
-server.use(static('./static/'));
+server.use(static('./static'));
