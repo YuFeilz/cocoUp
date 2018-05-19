@@ -10,13 +10,43 @@
 
 <body>
     <div class="wraper">
-        <div class="coco-top">
-            <a href="/admin">首页</a>
-            <a href="/admin/banner">banner</a>
-        </div>
+        <% include components/top-com.ejs %>
         <div class="coco-bootom">
-            <div class="coco-llider"></div>
-            <div class="coco-content"></div>
+            <div class="coco-llider">
+                <form action="?" method="post">
+                    标题: <input type="text" name="title">
+                    描述: <input type="text" name="description">
+                    链接: <input type="text" name="href">
+                    <input type="submit" value="添加" >
+                </form>
+            </div>
+            <div class="coco-content">
+                <table width="100%">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>标题</th>
+                <th>描述</th>
+                <th>链接</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+        <% for(var i=0;i<banners.length;i++){ %>
+             <tr>
+                <td><%= banners[i].ID %></td>
+                <td><%= banners[i].title %></td>
+                <td><%= banners[i].description %></td>
+                <td><%= banners[i].href %></td>
+                <td>
+                    <a href="?act=mod&id=<%= banners[i].ID %>">修改</a>
+                    <a href="?act=del&id=<%= banners[i].ID %>">删除</a>
+                </td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+            </div>
         </div>
     </div>
 </body>
