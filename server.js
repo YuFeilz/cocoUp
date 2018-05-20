@@ -34,7 +34,7 @@ server.set('views engine', 'html'); //输出html时需要的东西
 
 // 路由
 server.use('/', require('./route/web.js')());
-server.use('/admin', require('./route/admin.js')());
+server.use('/admin', require('./route/admin/index')());
 
 // 静态文件
 server.use(static('./static'));

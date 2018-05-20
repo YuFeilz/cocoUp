@@ -22,31 +22,43 @@
             </div>
             <div class="coco-content">
                 <table width="100%">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>标题</th>
-                <th>描述</th>
-                <th>链接</th>
-                <th>操作</th>
-            </tr>
-        </thead>
-        <tbody>
-        <% for(var i=0;i<banners.length;i++){ %>
-             <tr>
-                <td><%= banners[i].ID %></td>
-                <td><%= banners[i].title %></td>
-                <td><%= banners[i].description %></td>
-                <td><%= banners[i].href %></td>
-                <td>
-                    <a href="?act=mod&id=<%= banners[i].ID %>">修改</a>
-                    <a href="?act=del&id=<%= banners[i].ID %>">删除</a>
-                </td>
-            </tr>
-            <% } %>
-        </tbody>
-    </table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>标题</th>
+                            <th>描述</th>
+                            <th>链接</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <% for(var i=0;i<banners.length;i++){ %>
+                         <tr>
+                            <td><%= banners[i].ID %></td>
+                            <td><%= banners[i].title %></td>
+                            <td><%= banners[i].description %></td>
+                            <td><%= banners[i].href %></td>
+                            <td>
+                                <a href="?act=mod&id=<%= banners[i].ID %>">修改</a>
+                                <a href="?act=del&id=<%= banners[i].ID %>">删除</a>
+                            </td>
+                        </tr>
+                        <% } %>
+                    </tbody>
+                </table>
             </div>
+            <% if(typeof mod_data!='undefined'){ %>
+            <div>
+                <form action="?" method="post">
+                    <input type="hidden" name="mod_id" value="<%= mod_data[0].ID %>"/>
+                    标题: <input type="text" name="title" value="<%= mod_data[0].title%>"/>
+                    描述: <input type="text" name="description" value="<%= mod_data[0].description%>"/>
+                    链接: <input type="text" name="href" value="<%= mod_data[0].href%>"/>
+                    <input type="submit" value="修改" />
+                    <a href="/admin/banner">取消修改</a>
+                </form>
+            </div>
+            <% } %>
         </div>
     </div>
 </body>
