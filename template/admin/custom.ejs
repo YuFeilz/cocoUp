@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>banner</title>
+    <title>custom</title>
 </head>
 
 <body>
@@ -13,8 +13,8 @@
         <% include components/top-com.ejs %>
             <div class="coco-bootom">
                 <div class="coco-llider">
-                    <form action="?" method="post">
-                        标题: <input type="text" name="title"> 描述: <input type="text" name="description"> 链接: <input type="text" name="href">
+                    <form action="?" method="post" enctype="multipart/form-data">
+                        标题: <input type="text" name="title"> 描述: <input type="text" name="description"> 头像: <input type="file" name="f1">
                         <input type="submit" value="添加">
                     </form>
                 </div>
@@ -25,28 +25,28 @@
                                 <th>ID</th>
                                 <th>标题</th>
                                 <th>描述</th>
-                                <th>链接</th>
+                                <th>头像</th>
                                 <th>操作</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <% for(var i=0;i<banners.length;i++){ %>
+                            <% for(var i=0;i<evaluations.length;i++){ %>
                                 <tr>
                                     <td>
-                                        <%= banners[i].ID %>
+                                        <%= evaluations[i].ID %>
                                     </td>
                                     <td>
-                                        <%= banners[i].title %>
+                                        <%= evaluations[i].title %>
                                     </td>
                                     <td>
-                                        <%= banners[i].description %>
+                                        <%= evaluations[i].description %>
                                     </td>
                                     <td>
-                                        <%= banners[i].href %>
+                                        <img src="/upload/<%= evaluations[i].src %>" alt="">
                                     </td>
                                     <td>
-                                        <a href="?act=mod&id=<%= banners[i].ID %>">修改</a>
-                                        <a href="?act=del&id=<%= banners[i].ID %>">删除</a>
+                                        <a href="?act=mod&id=">修改</a>
+                                        <a href="?act=del&id=">删除</a>
                                     </td>
                                 </tr>
                                 <% } %>
@@ -55,21 +55,16 @@
                 </div>
                 <% if(typeof mod_data!='undefined'){ %>
                     <div>
-                        <form action="?" method="post">
-                            <input type="hidden" name="mod_id" value="<%= mod_data[0].ID %>" /> 标题: <input type="text" name="title" value="<%= mod_data[0].title%>" /> 描述: <input type="text" name="description" value="<%= mod_data[0].description%>" /> 链接:
-                            <input type="text" name="href" value="<%= mod_data[0].href%>" />
+                        <form action="?" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="mod_id" value="<%= mod_data[0].ID %>" /> 标题: <input type="text" name="title" value="<%= mod_data[0].title%>" /> 描述: <input type="text" name="description" value="<%= mod_data[0].description%>" /> 头像:
+                            <input type="file" name="f1" />
                             <input type="submit" value="修改" />
-                            <a href="/admin/banner">取消修改</a>
+                            <a href="/admin/custom">取消修改</a>
                         </form>
                     </div>
                     <% } %>
             </div>
     </div>
-</body>
-
-</html>
-</div>
-</div>
 </body>
 
 </html>

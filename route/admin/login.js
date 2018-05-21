@@ -1,10 +1,10 @@
-const express=require('express');
-const common=require('../../libs/common');
-const mysql=require('mysql');
+const express = require('express');
+const common = require('../../libs/common');
+const mysql = require('mysql');
 var db = mysql.createPool({ host: 'localhost', user: 'root', password: '123456', database: 'learn' });
 
-module.exports=function(){
-    var router=express.Router();
+module.exports = function() {
+    var router = express.Router();
     // 处理用户登录
     // 如果是get请求不做任何处理，直接显示到登录页面
     router.get('/', (req, res) => {
@@ -13,10 +13,10 @@ module.exports=function(){
 
     // 如果是post请求判断用户名密码验证处理
     router.post('/', (req, res) => {
-        var username = "'" + req.body.username + "'";
+        var username = req.body.username;
         var password = common.md5(req.body.password + common.MD5_SUFFIX);
 
-        db.query(`SELECT * FROM admin_table WHERE username="yufei"`, (err, data) => {
+        db.query(`SELECT * FROM admin_table WHERE username='${username}'`, (err, data) => {
             if (err) {
                 console.log(err);
                 res.status(500).send('数据库错误').end();

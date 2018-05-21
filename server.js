@@ -33,8 +33,8 @@ server.set('views', 'template'); //设置取数据的模板目录
 server.set('views engine', 'html'); //输出html时需要的东西
 
 // 路由
-server.use('/', require('./route/web.js')());
-server.use('/admin', require('./route/admin/index')());
+server.use('/', require('./route/web')()); //访问根目录默认导航到web页
+server.use('/admin', require('./route/admin/index')()); //访问admin导航到admin的主页面
 
-// 静态文件
+// 静态文件的访问路径
 server.use(static('./static'));
