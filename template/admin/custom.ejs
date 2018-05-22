@@ -45,8 +45,8 @@
                                         <img src="/upload/<%= evaluations[i].src %>" alt="">
                                     </td>
                                     <td>
-                                        <a href="?act=mod&id=">修改</a>
-                                        <a href="?act=del&id=">删除</a>
+                                        <a href="?act=mod&id=<%= evaluations[i].ID %>">修改</a>
+                                        <a href="?act=del&id=<%= evaluations[i].ID %>">删除</a>
                                     </td>
                                 </tr>
                                 <% } %>
